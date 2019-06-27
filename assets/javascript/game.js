@@ -14,22 +14,25 @@ var computerPickText = document.getElementById("computer-pick");
 var winsText = document.getElementById("wins-txt");
 var lossesText = document.getElementById("losses-txt");
 var guessesLeftText = document.getElementById("guesses-left-txt");
+var resultText = document.getElementById("result-txt");
 
 //This function is run whenever the user presses a key.
 document.onkeyup = function(event) {
     //Determines which key was pressed.
     var userGuess = event.key;
-    // console.log("your guess: " + userGuess);
+    
     //Randomly chooses a choice from the computerChoices array. This is the computer's guess.
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    // console.log("computer's guess: " + computerGuess);
+    
     //This logic determines the outcome of the game (win/loss), and incremments the appropriate number.
     if(userGuess === computerGuess){
         wins++;
         guessesLeft--;
+        resultText.textContent = "You Won! Computer Lost!";
     } else {
         losses++;
         guessesLeft--;
+        resultText.textContent = "You Lost! Computer Won!";
     } 
 
     if(guessesLeft == 0){
@@ -38,6 +41,7 @@ document.onkeyup = function(event) {
         losses = 0;
         computerGuess = "???";
         userGuess = " ";
+        resultText.textContent = " ";
     }
 
     //Display the user and computer guesses, wins/losses, and the number of guesses left.
